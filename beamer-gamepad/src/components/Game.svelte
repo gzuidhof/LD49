@@ -76,11 +76,11 @@
             }
 
             frameNumber ++;
-            if (player.y < 0 || player.y > 600) {
-                console.log(player);
+            if (player.y < -10 || player.y > 610) {
                 player.y = 300;
                 player.x = 200;
                 speed = 120;
+                score = 0;
                 if (score > bestScore) {
                     bestScore = score;
                 }
@@ -88,12 +88,12 @@
                     p.destroy();
                 })
             }
-            if (player.x < 0 || player.x > 600) {
-                console.log(player);
+            if (player.x < -10 || player.x > 850) {
                 player.y = 300;
                 player.x = 200;
                 speed = 120;
-                                if (score > bestScore) {
+                score = 0;
+                if (score > bestScore) {
                     bestScore = score;
                 }
                 allPoints.forEach(p => {
