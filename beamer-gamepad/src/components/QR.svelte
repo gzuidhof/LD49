@@ -33,5 +33,5 @@
   }
 </style>
 
-<div id=".room-qrcode"></div>
+<div class=".room-qrcode"></div>
 

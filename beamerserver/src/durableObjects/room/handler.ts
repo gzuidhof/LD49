@@ -77,9 +77,10 @@ export class RoomHandler {
             return;
             }
 
-            let data = JSON.parse(msg.data);
+            
 
             if (!receivedUserInfo) {
+                let data = JSON.parse(msg.data);
                 // The first message the client sends is the user info message with their name. Save it
                 // into their session object.
                 session.name = "" + (data.name || "anonymous");
@@ -109,19 +110,13 @@ export class RoomHandler {
 
             // Block people from sending overly long messages. This is also enforced on the client,
             // so to trigger this the user must be bypassing the client code.
-            if (data > 256) {
+            if (msg.data > 256) {
                 webSocket.send(JSON.stringify({error: "Message too long."}));
                 return;
             }
 
-            // Add timestamp. Here's where this.lastTimestamp comes in -- if we receive a bunch of
-            // messages at the same time (or if the clock somehow goes backwards????), we'll assign
-            // them sequential timestamps, so at least the ordering is maintained.
-            // data._ts = Math.max(Date.now(), this.lastTimestamp + 1);
-            // this.lastTimestamp = data._ts;
-
             // Broadcast the message to all other WebSockets.
-            let dataStr = JSON.stringify(data);
+            let dataStr = msg.data;
 
             if (config.role === "peer") {
                 this.broadcast("host", dataStr)

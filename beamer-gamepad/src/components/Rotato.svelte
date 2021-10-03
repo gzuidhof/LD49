@@ -42,6 +42,13 @@ async function start() {
 
     <button on:click={start}>Start!</button>
 
-    Current rotation: {current.alpha} {current.beta} {current.gamma}
+    Current rotation:<br>
+    <code>{current.alpha}</code>
+    <code>{current.beta}</code>
+    <code>{current.gamma}</code>
+
+    After starting: play the game on your PC, you no longer have to look at this screen. Feel free to turn your phone upside down!
+
+    <b>PROTIP:</b> Lock the screen rotation on your phone.
 </div>
 
