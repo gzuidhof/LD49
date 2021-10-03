@@ -123,7 +123,6 @@
 
 <h2>💯 Your best score: {Math.round(bestScore)}</h2>
 
-<code>Current rotation from phone: {rotationRate}</code>
-
+<code>Current rotation from phone: {rotationRate}</code><br>
 <code>Speed: {Math.round(speed)}</code>
 
