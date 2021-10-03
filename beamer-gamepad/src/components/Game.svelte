@@ -80,7 +80,7 @@
                 console.log(player);
                 player.y = 300;
                 player.x = 200;
-                speed = 100;
+                speed = 120;
                 if (score > bestScore) {
                     bestScore = score;
                 }
@@ -92,7 +92,7 @@
                 console.log(player);
                 player.y = 300;
                 player.x = 200;
-                speed = 100;
+                speed = 120;
                                 if (score > bestScore) {
                     bestScore = score;
                 }
@@ -102,9 +102,9 @@
             }
 
             score += 0.01
-            speed = speed + 0.03;
+            speed = speed + 0.06;
 
-            player.angle = player.angle + clamp(rotationRate * 0.05 + speed / 100_000, -1.5, 1.5)
+            player.angle = player.angle + clamp(rotationRate * 0.05 + speed / 100_000, -1.25, 1.25)
             const vec = this.physics.velocityFromAngle(player.angle, speed);
   
             player.body.setVelocity(vec.x, vec.y);        
