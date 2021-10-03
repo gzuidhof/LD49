@@ -15,7 +15,7 @@
 
   const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-  let rotationRate = 30;
+  $: rotationRate = 30;
   let player: any;
   let speed = 120;
   let frameNumber = 0;
@@ -122,6 +122,8 @@
 <h1>🌟 Score: {Math.round(score)}</h1>
 
 <h2>💯 Your best score: {Math.round(bestScore)}</h2>
+
+<code>Current rotation from phone: {rotationRate}</code>
 
 <code>Speed: {Math.round(speed)}</code>
 
