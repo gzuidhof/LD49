@@ -1,0 +1,29 @@
+type = "javascript"
+name = "beamerserver"
+account_id = "---"
+workers_dev = true
+# route = "https://sunder-starter.sunderjs.com/*"
+zone_id = "---"
+compatibility_date = "2021-10-02"
+
+[durable_objects]
+bindings = [
+  { name = "ROOM_DURABLE_OBJECT", class_name = "RoomDurableObject" }
+]
+
+[[migrations]]
+tag = "v1" # Should be unique for each entry
+new_classes = ["RoomDurableObject"] # Array of new classes
+
+[build]
+command = "npm run build"
+
+[build.upload]
+dir = "dist"
+format = "modules"
+main = "./worker.mjs"
+# format = "service-worker"
+
+[site]
+entry-point = "./"
+bucket = "./dist/static"

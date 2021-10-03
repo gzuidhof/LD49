@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# You can remove this, used for development of the template
+wrangler.toml
+
+build/
+dist/
+worker/
