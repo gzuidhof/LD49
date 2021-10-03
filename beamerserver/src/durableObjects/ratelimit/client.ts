@@ -38,7 +38,7 @@ export class RateLimiterClient {
   }
 
   // callLimiter() is an internal method which talks to the rate limiter.
-  async callLimiter() {
+  private async callLimiter() {
     try {
       let response;
       try {
@@ -62,8 +62,8 @@ export class RateLimiterClient {
 
       // The response indicates how long we want to pause before accepting more requests.
       let cooldown = +(await response.text());
-      await new Promise(resolve => setTimeout(resolve, cooldown * 1000));
 
+      await new Promise(resolve => setTimeout(resolve, cooldown * 1000));
       // Done waiting.
       this.inCooldown = false;
     } catch (err) {

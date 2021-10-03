@@ -2,6 +2,7 @@ import { Context, HttpStatus } from "sunder";
 import { Env } from "../../environment";
 import {generateRandomToken} from "@sunder/kit/crypto/random"
 import {base} from "@sunder/kit/encoding/baseX";
+import { RoomData } from "../../lib/hub";
 
 const DICTIONARY = "2345679ADEFGHJKLMNPQRSTUVWXYZ"; // 29 chars (no 0, O, I, 1, B, 8)
 const baseNoConfusion = base(DICTIONARY);
@@ -10,12 +11,6 @@ const baseNoConfusion = base(DICTIONARY);
 
 const ROOM_STATE_PREFIX = "ROOM_";
 const MAX_ROOM_AGE = 60 * 60 * 24 * 3; // 3 days
-
-interface RoomData {
-    roomCode: string;
-    createdAt: number;
-    durableObjectId: string;
-}
 
 export function generateRoomCode() {
     return generateRandomToken(48, baseNoConfusion).substring(0, 4).toUpperCase();
@@ -27,8 +22,10 @@ export async function handleRoomRequest(ctx: Context<Env>) {
     let roomCode!: string;
     let roomStorageKey!: string;
 
+    const attempts = 5;
+
     // We make some attempts to find a room that is available..
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < attempts; i++) {
         roomCode = generateRoomCode();
         roomStorageKey = ROOM_STATE_PREFIX + roomCode;
         const room = await ctx.state.storage.get<RoomData>(roomStorageKey);
@@ -36,8 +33,9 @@ export async function handleRoomRequest(ctx: Context<Env>) {
             break;
         } else if (now - room.createdAt > MAX_ROOM_AGE) {
             await ctx.state.storage.delete(roomStorageKey);
+            break;
         }
-        if (i === 6-1) {
+        if (i === attempts-1) {
             return ctx.throw("Couldn't find available room code :(");
         }
     }
@@ -69,7 +67,6 @@ export async function handleRoomLookup(ctx: Context<Env, {roomCode: string}>) {
 
     if (roomData === undefined) {
         ctx.throw(404, "Room not found");
-        console.log("THROOW");
         return;
     }
 

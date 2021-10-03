@@ -12,15 +12,14 @@ export const LOOKUP_ROOM_ENDPOINT = "/hub/room/lookup/:roomCode";
  */
 export class RoomHubDurableObject {
     private env: Env;
-
     private app: Sunder<Env>;
 
     constructor(state: DurableObjectState, env: Env) {
         this.env = env;
+
         this.app = new Sunder<Env>({state});
 
         const router = new Router<Env>();
-
         router.post(REQUEST_ROOM_ENDPOINT, handleRoomRequest);
         router.get(LOOKUP_ROOM_ENDPOINT, handleRoomLookup);
 
@@ -28,7 +27,7 @@ export class RoomHubDurableObject {
         this.app.use(router.middleware);
     }
 
-    async fetch(request: Request) {
+    fetch(request: Request) {
         return this.app.fetch(request, this.env, {waitUntil: () => 0});
     }
 }
