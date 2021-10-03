@@ -5,3 +5,5 @@
 It's a snake-like game in which you control the player with your phone's orientation.
 
 ![Gameplay GIF](https://i.imgur.com/yWQmMnJ.gif)
+
+Play it [here](https://ld49.pages.dev)!
