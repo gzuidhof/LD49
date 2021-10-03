@@ -3,6 +3,7 @@ import { BeamerClient } from "./api/client";
 import { generateClientId } from "./api/id";
 import QRCode from "./components/QR.svelte";
 import Rotato from "./components/Rotato.svelte";
+import Game from "./components/Game.svelte";
 
 export let beamerServerUrl: string;
 let role: "peer" | "host" | "" = "";
@@ -42,13 +43,15 @@ if (quickJoin) {
 </script>
 
 <main>
-	<h1>Beamer Game</h1>
+	<h1>Full Tilt</h1>
 
 	{#if role === "host" && roomCode}
 		<h2>ROOM CODE: {roomCode}</h2>
-		<span>Open this on your phone:</span>
+		<span>Open this on your phone and then scroll down</span>
 		<QRCode codeValue={quickJoinUrl} squareSize=200/>
 		<a href="{quickJoinUrl}"><code>{quickJoinUrl}</code></a>
+
+		<Game client={client}></Game>
 	{/if}
 
 	{#if (role === "")}

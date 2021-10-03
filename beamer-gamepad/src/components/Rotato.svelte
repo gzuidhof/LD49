@@ -50,8 +50,7 @@ async function start() {
     <br>
     After clicking start play the game on your PC.<br>
     
-    <br>Feel free to turn your phone upside down (=screen facing the floor)
-    <br><b>PROTIP:</b> Lock the screen rotation on your phone.
+    <br><b>PROTIP:</b> Lock the screen rotation on your phone if it is causing issues.
 
     <a href="/" style="font-size: 0.75em">Quit this room</a>
 </div>

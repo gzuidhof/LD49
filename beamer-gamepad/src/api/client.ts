@@ -16,6 +16,8 @@ export class BeamerClient {
     private role: "peer" | "host";
     private currentWebSocket?: WebSocket;
 
+    public onMessage?: (msg) => any;
+
     constructor(apiUrl: string, role: "peer" | "host") {
         this.apiUrl = apiUrl;
         this.role = role;
@@ -78,7 +80,12 @@ export class BeamerClient {
 
         ws.addEventListener("message", event => {
             let data = JSON.parse(event.data);
-            console.log("Received msg:", data);
+
+            if (this.onMessage) {
+                this.onMessage(data);
+            } else {
+                console.log("Received msg:", data);
+            }
         });
 
         ws.addEventListener("close", event => {
