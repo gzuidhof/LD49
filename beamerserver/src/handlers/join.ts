@@ -16,7 +16,7 @@ async function joinRoom(ctx: Context<Env, {roomCode: string, clientId: string}>,
         return;
     }
 
-    const rinfo = await client.getRoomInfo(ctx.params.roomCode);
+    const rinfo = await client.getRoomInfo(roomCode);
     if (!rinfo.ok) {
         ctx.throw(rinfo.status, rinfo.error);
         return;
@@ -30,8 +30,6 @@ async function joinRoom(ctx: Context<Env, {roomCode: string, clientId: string}>,
         method: "GET",
         headers: ctx.request.headers
     });
-
-    console.log("STATUS", resp.status);
 
     if (resp.status !== HttpStatus.SwitchingProtocols) {
         ctx.throw(resp.status, await resp.text())

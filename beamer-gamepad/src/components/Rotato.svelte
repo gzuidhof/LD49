@@ -48,9 +48,10 @@ async function start() {
     <code>{current.gamma}</code><br>
     </p>
     <br>
-    After starting: play the game on your PC, you no longer have to look at this screen. Feel free to turn your phone upside down!
-
-    <b>PROTIP:</b> Lock the screen rotation on your phone.
+    After clicking start play the game on your PC.<br>
+    
+    <br>Feel free to turn your phone upside down (=screen facing the floor)
+    <br><b>PROTIP:</b> Lock the screen rotation on your phone.
 
     <a href="/" style="font-size: 0.75em">Quit this room</a>
 </div>
