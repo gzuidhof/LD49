@@ -13,7 +13,7 @@
     document.head.append(script);
 		script.onload = function() {
 
-		qrcode = new QRCode(".room-qrcode", {
+		qrcode = new QRCode("room-qrcode", {
 		text: codeValue,
 		width: squareSize,
         height: squareSize,
@@ -28,10 +28,10 @@
 </script>
 
 <style>
-  .room-qrcode {
+  #room-qrcode {
     margin-top:15px;
   }
 </style>
 
-<div class="room-qrcode"></div>
+<div id="room-qrcode"></div>
 
