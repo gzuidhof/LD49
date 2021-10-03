@@ -2,6 +2,7 @@
 import { BeamerClient } from "./api/client";
 import { generateClientId } from "./api/id";
 import QRCode from "./components/QR.svelte";
+import Rotato from "./components/Rotato.svelte";
 
 export let beamerServerUrl: string;
 let role: "peer" | "host" | "" = "";
@@ -23,16 +24,6 @@ async function hostRoom() {
 	if (roomResponse.ok) {
 		roomCode = roomResponse.data.room.roomCode;
 		await client.joinRoom("hostuser", roomCode, clientId)
-
-		let frameNumber = 0;
-		const onFrame = () => {
-			frameNumber++;
-			if (frameNumber % 60 === 0) {
-				client.sendJson({"abc": 234});
-			}
-			requestAnimationFrame(onFrame);
-		}
-		onFrame();
 	} else {
 		console.error(roomResponse);
 	}
@@ -42,18 +33,6 @@ async function joinRoom() {
 	role = "peer";
 	client = new BeamerClient(beamerServerUrl, role);
 	await client.joinRoom("gamepad", roomCode, clientId)
-
-	let frameNumber = 0;
-
-	const onFrame = () => {
-		frameNumber++;
-		if (frameNumber % 60 === 0) {
-			client.sendJson({"bla": 123});
-		}
-
-		requestAnimationFrame(onFrame);
-	}
-	onFrame();
 }
 
 if (quickJoin) {
@@ -80,6 +59,10 @@ if (quickJoin) {
 	<form on:submit|preventDefault={joinRoom}>
 		<input placeholder="Enter room code" type="text" pattern="[a-zA-Z0-9]*" maxlength="4" minlength="4" bind:value={roomCode}>
 	</form>
+	{/if}
+
+	{#if role === "peer"}
+	<Rotato client={client}></Rotato>
 	{/if}
 </main>
 

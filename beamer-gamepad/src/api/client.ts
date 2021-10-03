@@ -15,7 +15,6 @@ export class BeamerClient {
     private apiUrl: string;
     private role: "peer" | "host";
     private currentWebSocket?: WebSocket;
-    private wsState = "" | "unstarted" | "connected";
 
     constructor(apiUrl: string, role: "peer" | "host") {
         this.apiUrl = apiUrl;

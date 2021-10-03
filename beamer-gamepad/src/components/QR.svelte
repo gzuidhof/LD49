@@ -28,9 +28,7 @@
 </script>
 
 <style>
-  #qrcode {
-    width:20px;
-    height:200x;
+  .room-qrcode {
     margin-top:15px;
   }
 </style>
