@@ -13,16 +13,16 @@ async function start() {
     await askForDeviceOrientationPermission();
     window.addEventListener("deviceorientation", (ev: DeviceOrientationEvent) => {
         current = {
-            alpha: ev.alpha,
-            beta: ev.beta,
-            gamma: ev.gamma,
+            alpha: Math.round(ev.alpha) >>> 0,
+            beta: Math.round(ev.beta) >>> 0,
+            gamma: Math.round(ev.gamma) >>> 0,
         }
     });
 
     let frameNumber = 0;
     const onFrame = () => {
         frameNumber++;
-        if (frameNumber % 3 === 0) {
+        if (frameNumber % 2 === 0) {
             client.sendJson({a: current.alpha, b: current.beta, g: current.gamma});
         }
         requestAnimationFrame(onFrame);
