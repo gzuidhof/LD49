@@ -15,7 +15,7 @@
 
   const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-  $: rotationRate = 30;
+  $: rotationRate = 0;
   let player: any;
   let speed = 120;
   let frameNumber = 0;
@@ -50,6 +50,7 @@
             this.load.image("plane", "/plane.png");
             this.load.image("point", "/point.png");
             this.load.audio("yay", "/pointsound.wav");
+            this.load.audio("die", "/die.wav");
             this.load.audio("music", "/music.wav");
         }
 
@@ -87,6 +88,7 @@
                 allPoints.forEach(p => {
                     p.destroy();
                 })
+                try {this.sound.play("die");} catch(e){}
             }
             if (player.x < -10 || player.x > 850) {
                 player.y = 300;
@@ -99,12 +101,17 @@
                 allPoints.forEach(p => {
                     p.destroy();
                 })
+                try {this.sound.play("die");} catch(e){}
+            }
+
+            if (score > bestScore) {
+                bestScore = score;
             }
 
             score += 0.01
-            speed = speed + 0.06;
+            speed = speed + 0.03;
 
-            player.angle = player.angle + clamp(rotationRate * 0.05 + speed / 100_000, -1.25, 1.25)
+            player.angle = player.angle + clamp(rotationRate * 0.06 + speed / 120_000, -1, 1)
             const vec = this.physics.velocityFromAngle(player.angle, speed);
   
             player.body.setVelocity(vec.x, vec.y);        
@@ -120,9 +127,8 @@
 
 </div>
 <h1>🌟 Score: {Math.round(score)}</h1>
-
 <h2>💯 Your best score: {Math.round(bestScore)}</h2>
 
-<code>Current rotation from phone: {rotationRate}</code><br>
+<code>Current rotation from phone (tilt away from you): {rotationRate}</code><br>
 <code>Speed: {Math.round(speed)}</code>
 
