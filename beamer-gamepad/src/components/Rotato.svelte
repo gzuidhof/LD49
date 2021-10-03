@@ -13,9 +13,9 @@ async function start() {
     await askForDeviceOrientationPermission();
     window.addEventListener("deviceorientation", (ev: DeviceOrientationEvent) => {
         current = {
-            alpha: Math.round(ev.alpha) >>> 0,
-            beta: Math.round(ev.beta) >>> 0,
-            gamma: Math.round(ev.gamma) >>> 0,
+            alpha: Math.round(ev.alpha),
+            beta: Math.round(ev.beta),
+            gamma: Math.round(ev.gamma),
         }
     });
 
