@@ -8,8 +8,8 @@
   let game: Phaser.Game;
 
   client.onMessage = (msg => {
-      if (msg.b) { // We use the beta value for the tilt
-        rotationRate = msg.b;
+      if (msg.g) { // We use the gamma value for the tilt
+        rotationRate = msg.g;
       }
   })
 
@@ -129,6 +129,6 @@
 <h1>🌟 Score: {Math.round(score)}</h1>
 <h2>💯 Your best score: {Math.round(bestScore)}</h2>
 
-<code>Current rotation from phone (tilt away from you): {rotationRate}</code><br>
+<code>Current rotation from phone (tilt sideways with your screen up): {rotationRate}</code><br>
 <code>Speed: {Math.round(speed)}</code>
 
