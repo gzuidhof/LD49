@@ -24,6 +24,7 @@ export async function handleRoomRequest(ctx: Context<Env>) {
 
     const attempts = 5;
 
+    const reqBody = await ctx.request.json();
     // We make some attempts to find a room that is available..
     for (let i = 0; i < attempts; i++) {
         roomCode = generateRoomCode();
@@ -40,18 +41,13 @@ export async function handleRoomRequest(ctx: Context<Env>) {
         }
     }
 
-    const id = ctx.env.ROOM_DURABLE_OBJECT.newUniqueId();
     const roomData: RoomData = {
         roomCode: roomCode,
-        durableObjectId: id.toString(),
+        durableObjectId: reqBody.durableObjectId,
         createdAt: now,
     }
 
-    await ctx.state.storage.put<RoomData>(roomStorageKey, {
-        roomCode: roomCode,
-        durableObjectId: id.toString(),
-        createdAt: now,
-    });
+    await ctx.state.storage.put<RoomData>(roomStorageKey, roomData);
 
     ctx.response.body = {
         room: roomData

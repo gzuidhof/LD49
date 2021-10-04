@@ -26,8 +26,10 @@ export class RoomHubClient {
     }
 
     async createRoom(): MaybePromise<RoomInfoResponse> {
+        const id = this.env.ROOM_DURABLE_OBJECT.newUniqueId();
         const hub = this.getStub();
         const resp = await hub.fetch("https://example.com" + REQUEST_ROOM_ENDPOINT, {
+            body: JSON.stringify({durableObjectId: id.toString()}),
             method: "POST"
         });
         const r = await resp.json();
