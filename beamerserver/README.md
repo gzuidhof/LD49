@@ -7,9 +7,6 @@ It is hosted on [Cloudflare Workers](https://workers.cloudflare.com) with the fo
 * The [Sunder](https://sunderjs.com) minimal web framework.
 * [ESBuild](https://esbuild.github.io/) for builds in <50ms (through [Estrella](https://github.com/rsms/estrella)).
 * [Typescript](https://www.typescriptlang.org/) for typechecking.
-* [Jest](https://jestjs.io/) for testing.
-* [Sass](https://sass-lang.com/) for CSS preprocessing and minification.
-* Static files are served using [Workers Sites](https://developers.cloudflare.com/workers/platform/sites).
 
 If you disagree with any of these choices it should be possible to swap out that decision.
 
